@@ -1,74 +1,73 @@
-3DCityDB-Web-Map-Client
-==================================
+# 3DCityDB-Web-Map-Client
 
-News
--------
-#### Version [v2.0.0](https://github.com/3dcitydb/3dcitydb-web-map/releases/tag/v2.0.0) released!
+## News
 
-The 3DCityDB Web Map Client now supports the visualization of various exchange formats: **COLLADA/KML/glTF**, **CZML**, **GeoJSON**, **Cesium 3D Tiles** and **Indexed 3D Scene Layers (I3S)**.
+__Version [v2.0.0](https://github.com/3dcitydb/3dcitydb-web-map/releases/tag/v2.0.0) released!__
 
-The latest release now supports displaying thematic data stored from data sources such as **Google Spreadsheets** (using Google Sheets API v4), **PostgreSQL** (using PostgREST API) and **OGC Feature API**. Additionally, existing thematic data **embedded** within the visualization datasets is also supported.
+The 3DCityDB Web Map Client now supports the visualization of various exchange formats: __COLLADA/KML/glTF__, __CZML__, __GeoJSON__, __Cesium 3D Tiles__ and __Indexed 3D Scene Layers (I3S)__.
+
+The latest release now supports displaying thematic data stored from data sources such as __Google Spreadsheets__ (using Google Sheets API v4), __PostgreSQL__ (using PostgREST API) and __OGC Feature API__. Additionally, existing thematic data __embedded__ within the visualization datasets is also supported.
 
 See [release announcements](RELEASES.md) and [change logs](CHANGES.md) for the complete list of changes made in this version, as well as in previous ones.
 
-Introduction
--------
-The **3DCityDB-Web-Map-Client** is a web-based front-end for high-performance 3D visualization and interactive exploration of **arbitrarily large semantic 3D city models** and other geospatial data. The web client utilizes the [Cesium Virtual Globe](https://cesium.com/) as its 3D geo-visualization engine based on HTML5 and Web Graphics Library (WebGL) to provide hardware acceleration and cross-platform functionalities like displaying 3D graphic contents on web browsers without the needs of additional plugins.
+## Introduction
 
-The key features and functionalities of the 3DCityDB-Web-Map-Client is summarized as follows: 
+The __3DCityDB-Web-Map-Client__ is a web-based front-end for high-performance 3D visualization and interactive exploration of __arbitrarily large semantic 3D city models__ and other geospatial data. The web client utilizes the [Cesium Virtual Globe](https://cesium.com/) as its 3D geo-visualization engine based on HTML5 and Web Graphics Library (WebGL) to provide hardware acceleration and cross-platform functionalities like displaying 3D graphic contents on web browsers without the needs of additional plugins.
 
-* Support for efficient displaying, caching, prefetching, dynamic loading and unloading of large pre-styled 3D visualization models in the form of **tiled KML/glTF datasets exported from the 3DCityDB** using the Importer/Exporter
-* Intuitive user interface for adding and removing **arbitrary number of data layers** for 3D visualization (KML/glTF, GeoJSON, Cesium 3D Tiles, I3S), together with WMS/WMTS imagery layer, and Cesium digital terrain model
-* Support for linking the 3D visualization models (KML/glTF, GeoJSON, Cesium 3D Tiles, I3S) with **external thematic data sources**, such as **Google Spreadsheets** and **PostgreSQL/PostgREST**, allowing for querying the thematic data of every 3D object
-* Support for displaying the existing **thematic data embedded** within the visualization datasets, such as KML, GeoJSON, Cesium 3D Tiles and I3S
-* Support for rich interaction with 3D visualization models, for example, **highlighting** of 3D objects on mouseover and mouseclick as well as **hiding** and **showing** of multiple selected 3D objects
-* Support for exploring a 3D object of interest from **different view perspectives** using third-party mapping services like **Microsoft Bing Maps** with oblique view, **Google Streetview**, and a combined version (**DualMaps**) 
-* Support for on-the-fly activating and deactivating **shadow visualization** of 3D objects and Cesium digital terrain models
-* Support for collaborative creation and sharing of the workspace of the 3DCityDB-Web-Map-Client by means of **generating a scene link** including information about the current camera perspective, activation status of the shadow visualization, parameters of the current loaded data layers, etc. This link can be easily shared or bookmarked, and can be reopened in a browser on different machines
-* Support for **mobile devices** (smartphones, tablets, etc.) with live tracking of geolocation and orientation
-* Packaged as a [**Docker image**](https://hub.docker.com/r/tumgis/3dcitydb-web-map/tags?page=1&ordering=last_updated) for fast and convenient deployment
+The key features and functionalities of the 3DCityDB-Web-Map-Client is summarized as follows:
 
-Architecture
--------
+* Support for efficient displaying, caching, prefetching, dynamic loading and unloading of large pre-styled 3D visualization models in the form of __tiled KML/glTF datasets exported from the 3DCityDB__ using the Importer/Exporter
+* Intuitive user interface for adding and removing __arbitrary number of data layers__ for 3D visualization (KML/glTF, GeoJSON, Cesium 3D Tiles, I3S), together with WMS/WMTS imagery layer, and Cesium digital terrain model
+* Support for linking the 3D visualization models (KML/glTF, GeoJSON, Cesium 3D Tiles, I3S) with __external thematic data sources__, such as __Google Spreadsheets__ and __PostgreSQL/PostgREST__, allowing for querying the thematic data of every 3D object
+* Support for displaying the existing __thematic data embedded__ within the visualization datasets, such as KML, GeoJSON, Cesium 3D Tiles and I3S
+* Support for rich interaction with 3D visualization models, for example, __highlighting__ of 3D objects on mouseover and mouseclick as well as __hiding__ and __showing__ of multiple selected 3D objects
+* Support for exploring a 3D object of interest from __different view perspectives__ using third-party mapping services like __Microsoft Bing Maps__ with oblique view, __Google Streetview__, and a combined version (__DualMaps__)
+* Support for on-the-fly activating and deactivating __shadow visualization__ of 3D objects and Cesium digital terrain models
+* Support for collaborative creation and sharing of the workspace of the 3DCityDB-Web-Map-Client by means of __generating a scene link__ including information about the current camera perspective, activation status of the shadow visualization, parameters of the current loaded data layers, etc. This link can be easily shared or bookmarked, and can be reopened in a browser on different machines
+* Support for __mobile devices__ (smartphones, tablets, etc.) with live tracking of geolocation and orientation
+* Packaged as a [__Docker image__](https://hub.docker.com/r/tumgis/3dcitydb-web-map/tags?page=1&ordering=last_updated) for fast and convenient deployment
+
+## Architecture
+
 <p align="center">
 <img src="theme/img/3dcitydb-web-map-client-architecture.jpg" width="800" />
 </p>
 
-License
--------
+## License
+
 The 3DCityDb-Web-Map-Client is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See the `LICENSE` file for more details.
 
-Latest release
---------------
+## Latest release
+
 All releases are available from the [releases section](https://github.com/3dcitydb/3dcitydb-web-map/releases).
 
-This project is also available in Docker, see [repository](https://github.com/tum-gis/3dcitydb-web-map-docker) 
+This project is also available in Docker, see [repository](https://github.com/tum-gis/3dcitydb-web-map-docker)
 and [images](https://hub.docker.com/r/tumgis/3dcitydb-web-map/tags?page=1&ordering=last_updated).
 
-For convenient use, there is an official [web link](https://www.3dcitydb.org/3dcitydb-web-map/2.0.0/3dwebclient/index.html) available for the current version that can be called to directly run the 3DCityDb-Web-Map-Client on your web browser. **All past and future versions** of the web client are hosted on our server using their own version numbers, so that they will remain accessible and available at any given time. 
+For convenient use, there is an official [web link](https://www.3dcitydb.org/3dcitydb-web-map/2.0.0/3dwebclient/index.html) available for the current version that can be called to directly run the 3DCityDb-Web-Map-Client on your web browser. __All past and future versions__ of the web client are hosted on our server using their own version numbers, so that they will remain accessible and available at any given time.
 
-System requirements
-------------------- 
-The hardware on which the 3DCityDB-Web-Map-Client will be run must have a graphics card installed that supports WebGL. In addition, the web browser in use must also provide appropriate WebGL support. 
+## System requirements
+
+The hardware on which the 3DCityDB-Web-Map-Client will be run must have a graphics card installed that supports WebGL. In addition, the web browser in use must also provide appropriate WebGL support.
 
 You can visit the following website to check whether your web browser supports WebGL or not:
 
 [http://get.webgl.org/](http://get.webgl.org)
 
-The 3DCityDB-Web-Map-Client has been successfully tested on (but is not limited to) the following web browsers under different desktop operating systems like Microsoft Windows, Linux, Apple Mac OS X, and even on mobile operating systems like Android and iOS. 
-* Apple Safari 
+The 3DCityDB-Web-Map-Client has been successfully tested on (but is not limited to) the following web browsers under different desktop operating systems like Microsoft Windows, Linux, Apple Mac OS X, and even on mobile operating systems like Android and iOS.
+
+* Apple Safari
 * Mozilla Firefox
 * Google Chrome
-* Opera 
+* Opera
 
 For best performance, it is recommended to use Google Chrome.
 
-Documentation
--------------
+## Documentation
+
 A complete and comprehensive documentation on the 3DCityDB-Web-Map-Client is installed with the 3DCityDB Importer/Exporter and is also available [online](https://www.3dcitydb.org/3dcitydb/documentation/).
 
-Contributing
-------------
+## Contributing
 
 The source codes of this project are available on [GitHub](https://github.com/3dcitydb/3dcitydb-web-map). All releases can be found [here](https://github.com/3dcitydb/3dcitydb-web-map/releases).
 
@@ -78,21 +77,20 @@ The platform GitHub is also used for collaborating:
 * To contribute code for fixing issues, please create a pull request with the issue id.
 * To propose a new feature, please also create a GitHub issue and open a discussion.
 
-Developers
------------------------------------
+## Developers
 
-The 3DCityDB-Web-Map-Client has been developed by: 
+The 3DCityDB-Web-Map-Client has been developed by:
 
 * Son H. Nguyen, Kanishk Chaturvedi, and Thomas H. Kolbe
 <br>[Chair of Geoinformatics, Technical University of Munich](https://www.asg.ed.tum.de/en/gis)
 
 and with the support from the following cooperation partners:
 
-* Zhihang Yao, Jannes Bolling, Lucas van Walstijn, and Claus Nagel 
+* Zhihang Yao, Jannes Bolling, Lucas van Walstijn, and Claus Nagel
 <br>[Virtual City Systems, Berlin](https://vc.systems)
 
-Demos
------------------------------------
+## Demos
+
 [Demo 1: Visualization of different LoD3 CityGML top-level features (TINRelief, Building, Bridge, Tunnel, WaterBody, Vegetation, CityFurniture, Transportation etc.) in glTF format](https://www.3dcitydb.org/3dcitydb-web-map/1.8.0/3dwebclient/index.html?title=Railway_Scene_LoD3_Demo&shadows=false&terrainShadows=0&latitude=52.327365948439194&longitude=13.030088863339616&height=217.81657370715422&heading=25.207012266729155&pitch=-29.116822621630785&roll=0.09098022034414832&layer_0=url%3Dhttps%253A%252F%252Fwww.3dcitydb.net%252F3dcitydb%252Ffileadmin%252Fmydata%252FRailway_Scene_LoD3%252FRailway_Scene_LoD3_collada_MasterJSON.json%26name%3DRailway_Scene_LoD3%26layerDataType%3DCOLLADA%252FKML%252FglTF%26gltfVersion%3D1.0%26active%3Dtrue%26spreadsheetUrl%3D%26cityobjectsJsonUrl%3D%26minLodPixels%3D140%26maxLodPixels%3D1.7976931348623157e%252B308%26maxSizeOfCachedTiles%3D50%26maxCountOfVisibleTiles%3D200&splashWindow=url%3Dsplash%252FSplashWindow.html%26showOnStart%3Dtrue)
 
 <p align="center">
@@ -123,76 +121,88 @@ Demos
 <img src="theme/img/vorarlberg_buildings_geometry_demo.jpg" width="800" />
 </p>
 
-# Mobile Support Extension
+## Mobile Support Extension
 
-## New features
+### New features
 
-The current 3DCityDB-Web-Map-Client is equipped with an extension that provides better support for mobile devices. 
-The extension comes with a built-in mobile detector, which can automatically detect and adjust the client's behaviors accordingly to whether the 3DCityDB-Web-Map-Client is operating on a mobile device. 
+The current 3DCityDB-Web-Map-Client is equipped with an extension that provides better support for mobile devices.
+The extension comes with a built-in mobile detector, which can automatically detect and adjust the client's behaviors accordingly to whether the 3DCityDB-Web-Map-Client is operating on a mobile device.
 Some of the most important mobile features enabled by this extension are listed as follows:
- 
-* **A more lightweight graphical user interface:** 
-In order to make the best use of the limited screen real-estate available on mobile devices, some elements are removed or hidden from the web client, 
-such as credit texts and logos, as well as some of Cesium's built-in navigation controls that can easily be manipulated using touch gestures. 
+
+* __A more lightweight graphical user interface:__
+In order to make the best use of the limited screen real-estate available on mobile devices, some elements are removed or hidden from the web client,
+such as credit texts and logos, as well as some of Cesium's built-in navigation controls that can easily be manipulated using touch gestures.
+
 <p align="center">
-<img src="theme/img/mobile_homepage.PNG" width="50%" />
+  <img src="theme/img/mobile_homepage.PNG" width="50%" />
 </p>
 
-* **Visual adjustments:**
-    * The main toolbox now scales to fit to the screen size. In case of excess lines/length, the toolbox becomes scrollable (see picture below).
-    <p align="center">
+* __Visual adjustments:__
+
+  * The main toolbox now scales to fit to the screen size. In case of excess lines/length, the toolbox becomes scrollable (see picture below).
+
+  <p align="center">
     <img src="theme/img/mobile_toolbox.PNG" width="50%" />
-    </p>
+  </p>
 
-    * The infobox displayed when a city object (e.g. building) is clicked is now displayed in fullscreen with scrollable contents, as illustrated below.
-    <p align="center">
+  * The infobox displayed when a city object (e.g. building) is clicked is now displayed in fullscreen with scrollable contents, as illustrated below.
+
+  <p align="center">
     <img src="theme/img/mobile_infobox.PNG" width="50%" />
-    </p>
+  </p>
 
-    * The loading icon is now shown as a horizontal bar at the bottom of the screen (highlighted by the green box in the picture below).
-    <p align="center">
+  * The loading icon is now shown as a horizontal bar at the bottom of the screen (highlighted by the green box in the picture below).
+
+  <p align="center">
     <img src="theme/img/mobile_loading.PNG" width="50%" />
-    </p>
+  </p>
 
-* Most importantly: **The introduction of a GPS button** (located on the top right corner in the view toolbar) providing new functionalities involving user's current location and orientation. Namely: 
-    * GPS "snapshot": shows the user's current position and orientation,
-    <p align="center">
+* Most importantly: __The introduction of a GPS button__ (located on the top right corner in the view toolbar) providing new functionalities involving user's current location and orientation. Namely:
+
+  * GPS "snapshot": shows the user's current position and orientation,
+
+  <p align="center">
     <img src="3dwebclient/images/GPS_single.png" width="15%" />
-    </p> 
+  </p>
 
-    * Real-time Compass Tracking: periodically shows the user's current orientation with fixed location,
-    <p align="center">
+  * Real-time Compass Tracking: periodically shows the user's current orientation with fixed location,
+
+  <p align="center">
     <img src="3dwebclient/images/GPS_on_ori.png" width="15%" />
-    </p> 
+  </p>
 
-    * Real-time Compass Tracking + Position or the "First-person View" mode: periodically shows the user's current orientation and position.
-    <p align="center">
+
+  * Real-time Compass Tracking + Position or the "First-person View" mode: periodically shows the user's current orientation and position.
+
+  <p align="center">
     <img src="3dwebclient/images/GPS_on_pos_ori.png" width="15%" />
-    </p> 
+  </p>
 
-    * Disable real-time tracking: the camera will then ascend to a higher altitude of the current location.
-    <p align="center">
+  * Disable real-time tracking: the camera will then ascend to a higher altitude of the current location.
+
+  <p align="center">
     <img src="3dwebclient/images/GPS_off.png" width="15%" />
-    </p>
+  </p>
 
-## Demos
+### Demos
 
 To test the mobile extension, simply click on one of the following two URLs:
+
 * [Demo first-person view](https://www.3dcitydb.org/3dcitydb-web-map/2.0.0/3dwebclient/index.html?title=3DCityDB-Web-Map-Client&shadows=false&terrainShadows=0&latitude=48.14841421296063&longitude=11.567992899981077&height=288.04731096361564&heading=328.7476197616151&pitch=-79.22129067410182&roll=359.4611498135091&layer_0=url%3Dhttps%253A%252F%252Fwww.3dcitydb.org%252F3dcitydb%252Ffileadmin%252Fmydata%252FTUM_Buildings%252FTUM_Buildings_glTF%252FTUM_Buildings_glTF_MasterJSON.json%26name%3DMUC%26layerDataType%3DCOLLADA%252FKML%252FglTF%26gltfVersion%3D0.8%26active%3Dtrue%26spreadsheetUrl%3Dhttps%253A%252F%252Ffusiontables.google.com%252Fdata%253Fdocid%253D1KE3odY92wmpwdyUs6osYhNPgRtI9W3GOQyuyHfp3%2523rows%253Aid%253D1%26cityobjectsJsonUrl%3D%26minLodPixels%3D140%26maxLodPixels%3D1.7976931348623157e%252B308%26maxSizeOfCachedTiles%3D200%26maxCountOfVisibleTiles%3D200&splashWindow=url%3Dsplash%252FSplashWindow.html%26showOnStart%3Dtrue)
+
 * [Demo debug-mode view](https://www.3dcitydb.org/3dcitydb-web-map/2.0.0/3dwebclient/index.html?title=3DCityDB-Web-Map-Client&shadows=false&terrainShadows=0&latitude=48.14841421296063&longitude=11.567992899981077&height=288.04731096361564&heading=328.7476197616151&pitch=-79.22129067410182&roll=359.4611498135091&layer_0=url%3Dhttps%253A%252F%252Fwww.3dcitydb.org%252F3dcitydb%252Ffileadmin%252Fmydata%252FTUM_Buildings%252FTUM_Buildings_glTF%252FTUM_Buildings_glTF_MasterJSON.json%26name%3DMUC%26layerDataType%3DCOLLADA%252FKML%252FglTF%26gltfVersion%3D0.8%26active%3Dtrue%26spreadsheetUrl%3Dhttps%253A%252F%252Ffusiontables.google.com%252Fdata%253Fdocid%253D1KE3odY92wmpwdyUs6osYhNPgRtI9W3GOQyuyHfp3%2523rows%253Aid%253D1%26cityobjectsJsonUrl%3D%26minLodPixels%3D140%26maxLodPixels%3D1.7976931348623157e%252B308%26maxSizeOfCachedTiles%3D200%26maxCountOfVisibleTiles%3D200&splashWindow=url%3Dsplash%252FSplashWindow.html%26showOnStart%3Dtrue&viewMode=debug).
 
-## Notes
+### Notes
 
-The mobile extension makes use of the Geolocation API and the DeviceOrientation API in HTML5. 
-The Geolocation API only functions via HTTPS since Google Chrome 50. Therefore, make sure the client is called from an HTTPS page or your own localhost. 
+The mobile extension makes use of the Geolocation API and the DeviceOrientation API in HTML5.
+The Geolocation API only functions via HTTPS since Google Chrome 50. Therefore, make sure the client is called from an HTTPS page or your own localhost.
 
 Additional important notes:
 
 * Test the client on devices equipped with GPS.
 * If the Geolocation API asks for permission to retrieve your current location, select "Allow".
 
-More information
-----------------
+## More information
 
 The 3DCityDB-Web-Map-Client is a part of the [3DCityDB Software Suite](https://www.3dcitydb.org) for managing and working with large semantic 3D city models in CityGML. However, the web client can also be used as a separate stand-alone component.
 
@@ -200,8 +210,8 @@ The 3DCityDB-Web-Map-Client is a part of the [3DCityDB Software Suite](https://w
 
 ## Acknowledgement
 
-The development of these methods and implementations were supported 
-and partially funded by the company [CADFEM](https://www.cadfem.net) 
-within a dedicated collaboration project in the context of the 
-[Leonhard Obermeyer Center (LOC)](https://www.ed.tum.de/loc) 
+The development of these methods and implementations were supported
+and partially funded by the company [CADFEM](https://www.cadfem.net)
+within a dedicated collaboration project in the context of the
+[Leonhard Obermeyer Center (LOC)](https://www.ed.tum.de/loc)
 at the [Technical University of Munich (TUM)](https://www.tum.de).

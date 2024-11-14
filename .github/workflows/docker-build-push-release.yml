@@ -1,0 +1,90 @@
+name: docker-build-push-release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published, edited]
+env:
+  IMAGE_NAME: 3dcitydb-web-map-client
+  PLATFORMS: linux/amd64,linux/arm64
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    -
+      name: Get release version without v
+      id: release_version
+      uses: battila7/get-version-action@v2
+    -
+      name: set lower case owner name
+      run: |
+        echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+      env:
+        OWNER: '${{ github.repository_owner }}'
+    -
+      name: Checkout repo
+      uses: actions/checkout@v4
+    -
+      name: Docker login Dockerhub
+      id: docker_login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    -
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    -
+      name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: ${{ env.PLATFORMS }}
+    -
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        platforms: ${{ env.PLATFORMS }}
+    -
+      name: Extract metadata (tags, labels) for docker image
+      id: meta
+      uses: docker/metadata-action@v5
+      env:
+        DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
+      with:
+        images: |
+          ${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}
+          ghcr.io/${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}
+        flavor: |
+          latest=${{ !github.event.release.prerelease }}
+        tags: |
+          type=semver,pattern={{version}}
+          labels: |
+          maintainer=Bruno Willenborg
+          maintainer.email=b.willenborg(at)tum.de
+          maintainer.organization=Chair of Geoinformatics, Technical University of Munich (TUM)
+          org.opencontainers.image.authors=Bruno Willenborg
+          org.opencontainers.image.vendor=3DCityDB Steering Committee
+          org.opencontainers.image.title=3D City Database Web Map Client
+          org.opencontainers.image.description=The 3DCityDB-Web-Map-Client is a web-based front-end for high-performance 3D visualization and interactive exploration of arbitrarily large semantic 3D city models and other geospatial data.
+          org.opencontainers.image.url=https://github.com/3dcitydb/3dcitydb-web-map
+          org.opencontainers.image.documentation=https://3dcitydb-docs.readthedocs.io/en/latest/webmap/index.html
+          org.opencontainers.image.source=https://github.com/3dcitydb/3dcitydb-web-map
+    -
+      name: Build and publish
+      uses: docker/build-push-action@v6
+      id: docker_build
+      with:
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        platforms: ${{ env.PLATFORMS }}
+        annotations: ${{ steps.meta.outputs.annotations }}
+    -
+      name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}

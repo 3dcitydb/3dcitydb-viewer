@@ -1,0 +1,21 @@
+{
+    "name": "3d-city-db-web-map-client-docker",
+    "version": "1.0.0",
+    "description": "Modified version of the 3DCityDB Web-Map-Client supporting directory listings.",
+    "homepage": "https://3dcitydb.org/",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tum-gis/3dcitydb-web-map-docker"
+    },
+    "dependencies": {
+        "compression": "1.7.x",
+        "express": "~4.21.x",
+        "request": "2.88.2",
+        "serve-index-next": "1.10.x",
+        "yargs": "17.7.2"
+    },
+    "engines": {
+      "node": ">=21.x.x"
+    }
+}
