@@ -1,42 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chat Application</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <title>Chat Interface with Logs</title>
     <style>
-        pre {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border: 1px solid #ddd;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            font-family: monospace;
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Lato", sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        background-color: #121212;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Chat Container */
+      .chat-container {
+        width: 800px;
+        height: 90vh;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Header */
+      .chat-header {
+        margin-bottom: 20px;
+      }
+
+      .chat-header h1 {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      .chat-header p {
+        color: #b0b0b0;
+        font-size: 1.1rem;
+        margin-top: 5px;
+      }
+
+      /* Chat Messages Area */
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 10px;
+      }
+
+      .message {
+        max-width: 80%;
+        margin-bottom: 15px;
+        padding: 12px 15px;
+        border-radius: 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .message.user {
+        background-color: #0a84ff;
+        color: #ffffff;
+        margin-left: auto;
+        text-align: left;
+      }
+
+      .message.assistant {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        margin-right: auto;
+        text-align: left;
+      }
+
+      /* Chat Input */
+      .chat-input-container {
+        display: flex;
+        align-items: center;
+        background-color: #2a2a2a;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .chat-input {
+        flex: 1;
+        background-color: #2a2a2a;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        outline: none;
+        font-size: 1rem;
+      }
+
+      .send-button {
+        margin-left: 10px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        transition: transform 0.2s ease;
+      }
+
+      .send-button:hover {
+        transform: scale(1.1);
+      }
+
+      /* Log Container */
+      .log-container {
+        height: 25%;
+        max-height: 25%;
+        background-color: #1e1e1e;
+        word-wrap: break-word;
+        color: #ccc;
+        border-top: 1px solid #333;
+        overflow-y: auto;
+        padding: 10px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.9rem;
+      }
+
+      .log-entry {
+        margin-bottom: 5px;
+        line-height: 1.2;
+      }
+
+      .log-entry.error {
+        color: red;
+      }
+
+      /* Spinner */
+      .spinner {
+        display: none;
+        margin-left: 10px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #0a84ff;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
-</head>
-<body>
-<button type="button" onclick="sendCoordinates()">Fly to Munich!</button>
-<pre id="messageText"></pre>
-</body>
+  </head>
 
-<script>
-    function sendCoordinates() {
-        const targetWindow = window.parent.document.getElementById('appWeb').contentWindow;
-        const cameraPosition = {
-            longitude: 11.564866,
-            latitude: 48.144463,
-            height: 4359.716,
-            heading: 360,
-            pitch: -90,
-            roll: 0
+  <body>
+    <div class="chat-container">
+      <!-- Header -->
+      <div class="chat-header">
+        <h1>Hello, User</h1>
+        <p>How can I help you today?</p>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <!-- Input Section -->
+      <div class="chat-input-container">
+        <input
+          type="text"
+          class="chat-input"
+          id="chatInput"
+          placeholder="Send a message..."
+          onkeydown="handleKeyPress(event)"
+        />
+        <img
+          src="./images/send.png"
+          alt="Send"
+          id="send-btn"
+          class="send-button"
+          onclick="sendMessage()"
+        />
+        <!-- Spinner -->
+        <div class="spinner" id="spinner"></div>
+      </div>
+
+      <!-- Log Section -->
+      <div id="logContainer" class="log-container"></div>
+    </div>
+
+    <script>
+      const apiEndpoint = "http://10.162.246.86:3008/api/data";
+
+      // Function to send a user message and get API response
+      async function sendMessage() {
+        const input = document.querySelector("#chatInput");
+        const messageContainer = document.querySelector("#chatMessages");
+        const spinner = document.querySelector("#spinner");
+        const sendbutton = document.querySelector("#send-btn");
+
+
+        if (input.value.trim()) {
+          // Add User Message
+          appendMessage(input.value, "user");
+
+          const userMessage = input.value;
+          input.value = "";
+
+          // Show spinner
+          spinner.style.display = "block";
+          sendbutton.style.display = "none";
+
+          try {
+            const response = await fetch(apiEndpoint, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ message: userMessage }),
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              const assistantMessage =
+                data.assistantMsg || "No response from assistant.";
+              appendMessage(assistantMessage, "assistant");
+              sendCoordinates(data.centroid[0].long, data.centroid[0].lat);
+            } else {
+              appendMessage(
+                "Error: Unable to fetch response from server.",
+                "assistant"
+              );
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            appendMessage("Error: Something went wrong.", "assistant");
+          } finally {
+            // Hide spinner
+            spinner.style.display = "none";
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+          }
         }
-        targetWindow.postMessage(JSON.stringify(cameraPosition), '*');
-    }
+      }
 
-    window.addEventListener('message', (event) => {
-        console.log('Message from web client app: ', event.data);
-        const messageText = document.getElementById("messageText");
-        messageText.innerText = event.data;
-    });
-</script>
+      // Function to append a message to the chat
+      function appendMessage(content, type) {
+        const messageContainer = document.querySelector("#chatMessages");
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", type);
+        messageDiv.textContent = content;
+        messageContainer.appendChild(messageDiv);
+      }
+
+      // Fetch logs and update log container
+      async function fetchLogs() {
+
+        try {
+          const response = await fetch("http://10.162.246.86:3008/api/logs");
+          if (response.ok) {
+            const logs = await response.json();
+            updateLogWidget(logs); // Update the logs in the container
+          }
+        } catch (error) {
+          console.error("Failed to fetch logs:", error);
+        }
+      }
+
+      function updateLogWidget(logs) {
+        const logContainer = document.getElementById("logContainer");
+        logContainer.innerHTML = "";
+        logs.forEach((log) => {
+          const logEntry = document.createElement("div");
+          logEntry.classList.add("log-entry");
+          if (log.type === "error") logEntry.classList.add("error");
+          logEntry.textContent = `[${log.timestamp}] ${log.message}`;
+          logContainer.appendChild(logEntry);
+        });
+        logContainer.scrollTop = logContainer.scrollHeight;
+      }
+
+      setInterval(fetchLogs, 2000);
+
+      function sendCoordinates(long, lat) {
+        const targetWindow =
+          window.parent.document.getElementById("appWeb").contentWindow;
+        const cameraPosition = {
+          longitude: parseFloat(long),
+          latitude: parseFloat(lat),
+          height: 359.716,
+          heading: 360,
+          pitch: -90,
+          roll: 0,
+        };
+        targetWindow.postMessage(JSON.stringify(cameraPosition), "*");
+      }
+      window.addEventListener("message", (event) => {
+        console.log("Message from web client app: ", event.data);
+      });
+
+      // Handle "Enter" key press
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      }
+    </script>
+  </body>
 </html>

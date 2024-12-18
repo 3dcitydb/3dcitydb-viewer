@@ -37,6 +37,23 @@
 </div>
 
 <script>
+     // Restart the server when the page is loaded
+      async function restartServer() {
+        try {
+          const response = await fetch(
+            "http://10.162.246.86:3008/restart-server",
+            {
+              method: "POST",
+            }
+          );
+          console.log(await response.text());
+        } catch (error) {
+          console.error("Error restarting server:", error);
+        }
+      }
+
+      // Call restartServer when the page loads
+      window.addEventListener("load", restartServer);
     // Functions for resizing
     const divider = document.getElementById('divider');
     const container = document.getElementById('container');
