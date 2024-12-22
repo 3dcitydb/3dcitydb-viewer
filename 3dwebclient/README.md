@@ -23,7 +23,7 @@ git checkout chat-web-triangle
 cd 3dwebclient
 
 # Install Python package
-python3 install websockets
+pip3 install websockets
 
 # First, run the customized web client (on Windows)
 python3 webApp.py
