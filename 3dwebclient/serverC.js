@@ -1,4 +1,4 @@
-const socket = new WebSocket('ws://localhost:8001/serverC');
+let socket = new WebSocket('ws://localhost:8001/serverC');
 
 // Connection opened
 socket.onopen = () => {
@@ -35,8 +35,21 @@ socket.onclose = (event) => {
     // Reconnect after delay
     setTimeout(() => {
         console.log('♻️ Attempting to reconnect...');
-        location.reload();
+        reconnectWebSocket();
     }, 3000);
+
+    // Reconnect logic
+    function reconnectWebSocket() {
+        const newSocket = new WebSocket('ws://localhost:8001/serverC');
+
+        newSocket.onopen = socket.onopen;
+        newSocket.onmessage = socket.onmessage;
+        newSocket.onclose = socket.onclose;
+        newSocket.onerror = socket.onerror;
+
+        // Update the socket reference
+        socket = newSocket;
+    }
 };
 
 // Handle connection errors
